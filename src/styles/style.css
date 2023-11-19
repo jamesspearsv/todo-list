@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
+:root {
+  --color-primary: #233d4d;
+  --color-secondary: #fe7f2d;
+  --color-accent: #e1e1e1;
+  --font-primary: "Open Sans", sans-serif;
+  --topbar-height: 50px;
+  --content-height: calc(100vh - var(--topbar-height));
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#topbar {
+  width: 100%;
+  height: var(--topbar-height);
+  background-color: var(--color-primary);
+}
+
+#content-container {
+  display: flex;
+}
+
+nav {
+  width: 20%;
+  height: var(--content-height);
+  padding: 2rem;
+  border-right: var(--color-accent) solid 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+nav > ul {
+  list-style: none;
+}
+
+#new-list-button {
+  margin-top: auto;
+  justify-self: end;
+}
+
+main {
+  margin: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+/* Class Based Styles */
+.button {
+  background-color: var(--color-secondary);
+  padding: 0.5rem;
+  border: 2px solid var(--color-secondary);
+}
+
+.rectangular-button {
+  border-radius: 50px;
+}
+
+.circular-button {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.button:hover {
+  background-color: white;
+}
+
+.divider {
+  background-color: var(--color-accent);
+  height: 1px;
+  width: 100%;
+}
+
+.todo-list {
+  list-style: none;
+}
+
+.todo-list-item * {
+  display: inline;
+}
