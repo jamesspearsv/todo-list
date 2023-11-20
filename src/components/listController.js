@@ -3,13 +3,15 @@ import { Task } from "./task";
 
 export const ListController = (() => {
   const showList = (list) => {
-    for (const task of list.tasks) {
-      console.log(task);
-    }
+    console.log(list.id);
+    console.log(list.tasks);
+    // for (const task of list.tasks) {
+    //   console.log(task);
+    // }
   };
 
-  const makeTask = (title, dueDate, priority) => {
-    const newTask = new Task(title, dueDate, priority);
+  const makeTask = (title) => {
+    const newTask = new Task(title);
     return newTask;
   };
 
