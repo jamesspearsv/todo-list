@@ -3,10 +3,7 @@ import { AppController } from "./components/appController";
 import { ViewController } from "./components/viewController";
 
 // App State and Data
-const Notebook = [];
-const State = {
-  curentList: 1,
-};
+const Notebook = []; // Array of objects
 
 document.addEventListener("DOMContentLoaded", () => {
   //
@@ -18,18 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const tempList = AppController.makeList("Demo List");
   tempList.id = 0;
   tempList.tasks = ["go to work", "go to school", "workout"];
+
   AppController.addList(Notebook, tempList);
   ViewController.updateNav(Notebook);
+  ViewController.updateList(Notebook, tempList.id);
 
   // Add new task
   document.getElementById("new-task-button").addEventListener("click", () => {
-    // const input = prompt("New Task?");
-    // const task = AppController.makeTask(input);
-    const list = document.getElementById("0");
-
-    console.log(list.id);
-
-    // AppController.addTask(Notebook);
+    const input = prompt("New Task?");
+    const task = AppController.makeTask(input);
+    const listID = document.getElementById("main-heading");
+    AppController.addTask(Notebook, listID);
   });
 
   //   Show list
@@ -49,6 +45,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("show-lists-button").addEventListener("click", () => {
     AppController.showAllLists(Notebook);
   });
-
-  window.State = State;
 });

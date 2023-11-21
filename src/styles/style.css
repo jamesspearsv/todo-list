@@ -64,6 +64,11 @@ main {
   overflow-y: scroll;
 }
 
+.todo-list-item {
+  display: flex;
+  gap: 1rem;
+}
+
 .todo-list-item * {
   display: inline;
 }

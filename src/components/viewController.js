@@ -1,3 +1,5 @@
+import { findListIndex } from "./utils";
+
 export const ViewController = (() => {
   //   Control view and DOM interactions
   const updateNav = (Notebook) => {
@@ -7,10 +9,8 @@ export const ViewController = (() => {
     for (const list of Notebook) {
       const navItem = document.createElement("li");
 
-      console.log(list);
-
       navItem.addEventListener("click", () => {
-        console.log("click: view controller");
+        updateList(Notebook, list.id);
       });
 
       navItem.classList.add("nav-item");
@@ -22,5 +22,34 @@ export const ViewController = (() => {
     }
   };
 
-  return { updateNav };
+  const updateList = (Notebook, listID) => {
+    const activeList = findListIndex(Notebook, listID);
+
+    console.log(activeList);
+
+    const heading = document.getElementById("main-heading");
+    heading.textContent = activeList.name;
+
+    const list = document.getElementById("todo-list");
+
+    list.replaceChildren();
+
+    for (let task in activeList.tasks) {
+      const listItem = document.createElement("li");
+
+      listItem.classList.add("todo-list-item");
+      const p = document.createElement("p");
+      p.textContent = activeList.tasks[task];
+
+      const input = document.createElement("input");
+      input.setAttribute("type", "checkbox");
+
+      listItem.appendChild(input);
+      listItem.appendChild(p);
+
+      list.appendChild(listItem);
+    }
+  };
+
+  return { updateNav, updateList };
 })();
