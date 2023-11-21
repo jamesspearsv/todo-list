@@ -1,10 +1,10 @@
 import { List } from "./list";
 import { Task } from "./task";
+import { Notebook } from "./notebook";
 
-export const ListController = (() => {
+export const AppController = (() => {
   const showList = (list) => {
-    console.log(list.id);
-    console.log(list.tasks);
+    console.log(list);
     // for (const task of list.tasks) {
     //   console.log(task);
     // }
@@ -24,5 +24,14 @@ export const ListController = (() => {
     return newList;
   };
 
-  return { showList, addTask, makeList, makeTask };
+  const addList = (newList) => {
+    const key = newList.id;
+    Notebook = { ...Notebook, key: newList };
+  };
+
+  const showAllLists = () => {
+    console.log(Notebook);
+  };
+
+  return { showList, makeTask, addTask, makeList, addList, showAllLists };
 })();
