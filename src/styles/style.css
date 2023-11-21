@@ -98,3 +98,7 @@ main {
   height: 1px;
   width: 100%;
 }
+
+.nav-item {
+  cursor: pointer;
+}
