@@ -12,6 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // that initializes that app on start
   //
 
+  ((Notebook) => {
+    ViewController.buildNav(Notebook);
+    ViewController.buildList(Notebook);
+  })();
+
   // Demo Data
   const tempList = AppController.makeList("Demo List");
   const tempTask = AppController.makeTask("task 1");
