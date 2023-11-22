@@ -21,11 +21,24 @@ export const AppController = (() => {
     return task;
   };
 
-  const addTask = (Notebook, listID) => {
+  const addTask = (Notebook, task) => {
     // Add task to list
-    const activeList = findListIndex(Notebook, listID);
+    console.log(task);
+    let activeList = {};
+
+    for (let list in Notebook) {
+      if (Notebook[list].active === true) {
+        activeList = Notebook[list];
+        break;
+      }
+    }
 
     console.log(activeList);
+
+    let tasks = activeList.tasks;
+
+    tasks.push(task);
+    console.log(tasks);
   };
 
   return {

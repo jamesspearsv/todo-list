@@ -1,4 +1,13 @@
 export function findListIndex(Notebook, id) {
-  const list = Notebook.find((list) => list.id === id);
-  return list;
+  console.log("utils.js");
+  let activeList = {};
+
+  for (let i = 0; i < Notebook.length; i++) {
+    if (Notebook[i].id === id) {
+      activeList = Notebook[i];
+      break;
+    }
+  }
+
+  return activeList;
 }

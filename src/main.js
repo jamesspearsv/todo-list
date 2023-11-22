@@ -4,6 +4,7 @@ import { ViewController } from "./components/viewController";
 
 // App State and Data
 const Notebook = []; // Array of objects
+window.Notebook = Notebook;
 
 document.addEventListener("DOMContentLoaded", () => {
   //
@@ -13,36 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Demo Data
   const tempList = AppController.makeList("Demo List");
+  const tempTask = AppController.makeTask("task 1");
   tempList.id = 0;
-  tempList.tasks = ["go to work", "go to school", "workout"];
+  tempList.tasks.push(tempTask);
 
   AppController.addList(Notebook, tempList);
   ViewController.updateNav(Notebook);
   ViewController.updateList(Notebook, tempList.id);
 
-  // Add new task
-  document.getElementById("new-task-button").addEventListener("click", () => {
-    const input = prompt("New Task?");
-    const task = AppController.makeTask(input);
-    const listID = document.getElementById("main-heading");
-    AppController.addTask(Notebook, listID);
-  });
+  // Todo: Build nav
 
-  //   Show list
-  document.getElementById("show-list-button").addEventListener("click", () => {
-    AppController.showList(mylist);
-  });
-
-  // Add new list
-  document.getElementById("new-list-button").addEventListener("click", () => {
-    const listName = prompt("New list name?");
-    const newList = AppController.makeList(listName);
-    AppController.addList(Notebook, newList);
-    ViewController.updateNav(Notebook);
-  });
-
-  // Show all lists
-  document.getElementById("show-lists-button").addEventListener("click", () => {
-    AppController.showAllLists(Notebook);
-  });
+  // Todo: Build list
 });
