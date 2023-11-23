@@ -16,8 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Demo Data
   const tempList = AppController.makeList("Demo List");
   const tempTask = AppController.makeTask("task 1");
+  const tempTask1 = AppController.makeTask("task 2");
   // tempList.id = 0;
   tempList.tasks.push(tempTask);
+  tempList.tasks.push(tempTask1);
   AppController.addList(Notebook, tempList);
 
   // Init app
@@ -35,5 +37,5 @@ document.addEventListener("DOMContentLoaded", () => {
     ViewController.buildNav(Notebook);
   });
 
-  // Todo: Build list
+  // Todo: Add task button
 });

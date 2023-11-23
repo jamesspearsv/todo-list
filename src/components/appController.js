@@ -1,6 +1,5 @@
 import { List } from "./list";
 import { Task } from "./task";
-import { findListIndex } from "./utils";
 
 export const AppController = (() => {
   const makeList = (listName) => {
@@ -19,6 +18,11 @@ export const AppController = (() => {
   const makeTask = (name) => {
     const task = new Task(name);
     return task;
+  };
+
+  const addTask = (Notebook, task) => {
+    // Find active list in notebook
+    // Add new task to Notebook
   };
 
   return {

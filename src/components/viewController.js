@@ -20,17 +20,42 @@ export const ViewController = (() => {
   };
 
   const buildList = (Notebook, id) => {
-    console.log("Build list");
-    let activelist = {};
+    // Set active list
+    let activeIndex;
     for (let index in Notebook) {
       const list = Notebook[index];
       if (id === list.id) {
-        document.getElementById(list.id).classList.add("active");
+        activeIndex = index;
         list.active = true;
       } else {
-        document.getElementById(list.id).classList.remove("active");
         list.active = false;
       }
+    }
+
+    const list = Notebook[activeIndex];
+
+    const list_heading = document.getElementById("list-heading");
+    list_heading.textContent = list.name;
+
+    const todo_list = document.getElementById("todo-list");
+
+    todo_list.replaceChildren();
+
+    for (const task in list.tasks) {
+      const list_item = document.createElement("li");
+      list_item.classList.add("todo-list-item");
+
+      const checkbox = document.createElement("input");
+      checkbox.setAttribute("type", "checkbox");
+      checkbox.classList.add();
+
+      const content = document.createElement("p");
+      content.textContent = list.tasks[task].title;
+
+      list_item.appendChild(checkbox);
+      list_item.appendChild(content);
+
+      todo_list.appendChild(list_item);
     }
   };
 
