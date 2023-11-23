@@ -1,10 +1,10 @@
 import { List } from "./list";
 import { Task } from "./task";
+import { Utilities } from "./utilities";
 
 export const AppController = (() => {
   const makeList = (listName) => {
-    const newList = new List(listName);
-    return newList;
+    return new List(listName);
   };
 
   const addList = (Notebook, newList) => {
@@ -15,14 +15,13 @@ export const AppController = (() => {
     console.log(Notebook);
   };
 
-  const makeTask = (name) => {
-    const task = new Task(name);
-    return task;
+  const makeTask = (title) => {
+    return new Task(title);
   };
 
-  const addTask = (Notebook, task) => {
-    // Find active list in notebook
-    // Add new task to Notebook
+  const addTask = (Notebook, id, task) => {
+    const list = Utilities.findListFromID(Notebook, id);
+    list.tasks.push(task);
   };
 
   return {
@@ -30,5 +29,6 @@ export const AppController = (() => {
     addList,
     showAllLists,
     makeTask,
+    addTask,
   };
 })();

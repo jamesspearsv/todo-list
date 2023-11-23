@@ -1,3 +1,5 @@
+import { Utilities } from "./utilities";
+
 export const ViewController = (() => {
   //   Control view and DOM interactions
   const buildNav = (Notebook) => {
@@ -21,18 +23,9 @@ export const ViewController = (() => {
 
   const buildList = (Notebook, id) => {
     // Set active list
-    let activeIndex;
-    for (let index in Notebook) {
-      const list = Notebook[index];
-      if (id === list.id) {
-        activeIndex = index;
-        list.active = true;
-      } else {
-        list.active = false;
-      }
-    }
+    document.getElementById("action-bar").dataset.listid = id;
 
-    const list = Notebook[activeIndex];
+    const list = Utilities.findListFromID(Notebook, id);
 
     const list_heading = document.getElementById("list-heading");
     list_heading.textContent = list.name;

@@ -60,8 +60,6 @@ main {
 
 .todo-list {
   list-style: none;
-  height: 65vh;
-  overflow-y: scroll;
 }
 
 .todo-list-item {
@@ -84,18 +82,53 @@ main {
   border: 2px solid var(--color-secondary);
 }
 
-.rectangular-button {
-  border-radius: 50px;
+.button:hover {
+  background-color: white;
 }
 
-.circular-button {
+.button-circular {
   border-radius: 50%;
   width: 40px;
   height: 40px;
 }
 
-.button:hover {
-  background-color: white;
+.button-danger {
+  background-color: red;
+  padding: 0.5rem;
+  border: 2px solid red;
+}
+
+.button-primary {
+  background-color: var(--color-secondary);
+  padding: 0.5rem;
+  border: 2px solid var(--color-secondary);
+}
+
+.button-rectangular {
+  border-radius: 50px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.modal {
+  margin: auto;
+  border: none;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.592);
 }
 
 .divider {
