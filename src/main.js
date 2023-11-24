@@ -29,15 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
     ViewController.buildList(Notebook, Notebook[0].id);
   })();
 
+  const dialog = document.getElementById("new-list-dialog");
+
   // Add list button opens add list modal
   document.getElementById("new-list-button").addEventListener("click", () => {
-    const dialog = document.getElementById("new-list-dialog");
     dialog.showModal();
-    // const input = prompt("New List Name:");
-    // const new_list = AppController.makeList(input);
-    // AppController.addList(Notebook, new_list);
-    // ViewController.buildNav(Notebook);
-    // ViewController.buildList(Notebook, new_list.id);
   });
 
   // TODO: Add task button open add task modal
@@ -52,18 +48,26 @@ document.addEventListener("DOMContentLoaded", () => {
       ViewController.buildList(Notebook, id);
     });
 
-  // TODO: Add task when add task modal is submitted
+  // Add new list when add task modal is submitted
   document
-    .getElementById("new-list-submit")
-    .addEventListener("click", (event) => {
+    .getElementById("new-list-form")
+    .addEventListener("submit", (event) => {
       event.preventDefault();
-      console.log("new list submit");
+      const input = event.target.elements.listname.value;
+
+      const new_list = AppController.makeList(input);
+      AppController.addList(Notebook, new_list);
+      ViewController.buildNav(Notebook);
+      ViewController.buildList(Notebook, new_list.id);
+
+      event.target.reset();
+      dialog.close();
     });
 
   document
     .getElementById("new-list-cancel")
     .addEventListener("click", (event) => {
       event.preventDefault();
-      console.log("new list cancel");
+      dialog.close();
     });
 });
