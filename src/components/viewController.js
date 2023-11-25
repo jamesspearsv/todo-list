@@ -52,5 +52,13 @@ export const ViewController = (() => {
     }
   };
 
-  return { buildNav, buildList };
+  const toggleModal = (dialog, action) => {
+    if (action === "open") {
+      dialog.showModal();
+    } else if (action === "close") {
+      dialog.close();
+    }
+  };
+
+  return { buildNav, buildList, toggleModal };
 })();

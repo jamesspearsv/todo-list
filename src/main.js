@@ -29,24 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
     ViewController.buildList(Notebook, Notebook[0].id);
   })();
 
-  const dialog = document.getElementById("new-list-dialog");
+  // Shared DOM Elements
+  const newListDialog = document.getElementById("new-list-dialog");
+  const newTaskDialog = document.getElementById("new-task-dialog");
 
+  // Event Listeners
   // Add list button opens add list modal
   document.getElementById("new-list-button").addEventListener("click", () => {
-    dialog.showModal();
+    ViewController.toggleModal(newListDialog, "open");
   });
-
-  // TODO: Add task button open add task modal
-  document
-    .getElementById("new-task-button")
-    .addEventListener("click", (event) => {
-      const input = prompt("New task?");
-      const task = AppController.makeTask(input);
-      const id = Number(document.getElementById("action-bar").dataset.listid);
-
-      AppController.addTask(Notebook, id, task);
-      ViewController.buildList(Notebook, id);
-    });
 
   // Add new list when add task modal is submitted
   document
@@ -54,20 +45,33 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("submit", (event) => {
       event.preventDefault();
       const input = event.target.elements.listname.value;
-
       const new_list = AppController.makeList(input);
+
       AppController.addList(Notebook, new_list);
       ViewController.buildNav(Notebook);
       ViewController.buildList(Notebook, new_list.id);
 
       event.target.reset();
-      dialog.close();
+      ViewController.toggleModal(newListDialog, "close");
     });
 
   document
     .getElementById("new-list-cancel")
     .addEventListener("click", (event) => {
       event.preventDefault();
-      dialog.close();
+      ViewController.toggleModal(newListDialog, "close");
+    });
+
+  // TODO: Add task button opens add task modal
+  document
+    .getElementById("new-task-button")
+    .addEventListener("click", (event) => {
+      // const input = prompt("New task?");
+      // const task = AppController.makeTask(input);
+      // const id = Number(document.getElementById("action-bar").dataset.listid);
+      // AppController.addTask(Notebook, id, task);
+      // ViewController.buildList(Notebook, id);
+
+      ViewController.toggleModal(newTaskDialog, "open");
     });
 });
