@@ -21,9 +21,23 @@ export const AppController = (() => {
     list.tasks.push(task);
   };
 
+  const deleteList = (Notebook, listid) => {
+    const confirmation = confirm("Are you sure you want to delete this list?");
+
+    if (confirmation === false) {
+      return 1;
+    } else {
+      const id = Number(listid);
+      const listindex = Utilities.findIndexFromID(Notebook, id);
+
+      Notebook.splice(listindex, 1);
+    }
+  };
+
   return {
     makeList,
     addList,
+    deleteList,
     makeTask,
     addTask,
   };

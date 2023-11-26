@@ -1,10 +1,14 @@
 import { Utilities } from "./utilities";
 
 export const ViewController = (() => {
+  // TODO: SHARED DOM elements
+  const todo_list = document.getElementById("todo-list");
+  const list_heading = document.getElementById("list-heading");
+
   //   Control view and DOM interactions
   const buildNav = (Notebook) => {
-    // Remove all nav items
     const nav_list = document.getElementById("nav_list");
+    // Remove all nav items
     nav_list.replaceChildren();
 
     // Iterate over Notebook
@@ -29,10 +33,7 @@ export const ViewController = (() => {
 
     const list = Utilities.findListFromID(Notebook, id);
 
-    const list_heading = document.getElementById("list-heading");
     list_heading.textContent = list.name;
-
-    const todo_list = document.getElementById("todo-list");
 
     todo_list.replaceChildren();
 
@@ -54,6 +55,11 @@ export const ViewController = (() => {
     }
   };
 
+  const clearList = () => {
+    todo_list.replaceChildren();
+    list_heading.textContent = "";
+  };
+
   const toggleModal = (dialog, action) => {
     if (action === "open") {
       dialog.showModal();
@@ -64,5 +70,5 @@ export const ViewController = (() => {
     }
   };
 
-  return { buildNav, buildList, toggleModal };
+  return { buildNav, buildList, clearList, toggleModal };
 })();

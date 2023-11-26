@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Shared DOM Elements
   const newListDialog = document.getElementById("new-list-dialog");
   const newTaskDialog = document.getElementById("new-task-dialog");
+  const actionBar = document.getElementById("action-bar");
 
   // EVENT LISTENERS
   // Add list button opens add list modal
@@ -59,8 +60,29 @@ document.addEventListener("DOMContentLoaded", () => {
       ViewController.toggleModal(newListDialog, "close");
     });
 
+  document
+    .getElementById("delete-list-button")
+    .addEventListener("click", () => {
+      const listid = actionBar.dataset.listid;
+      AppController.deleteList(Notebook, listid);
+      ViewController.buildNav(Notebook);
+
+      if (Notebook.length != 0) {
+        const id = Notebook[0].id;
+        ViewController.buildList(Notebook, id);
+      } else {
+        ViewController.clearList();
+      }
+    });
+
   // Add task button opens add task modal
   document.getElementById("new-task-button").addEventListener("click", () => {
+    // Check if Notebook has any lists
+    if (Notebook.length === 0) {
+      alert("Please make a list first");
+      return;
+    }
+
     ViewController.toggleModal(newTaskDialog, "open");
   });
 
@@ -69,10 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("new-task-form")
     .addEventListener("submit", (event) => {
       event.preventDefault();
+
       const form = event.target;
       const input = form.elements.tasktitle.value;
       const task = AppController.makeTask(input);
-      const listid = document.getElementById("action-bar").dataset.listid;
+      const listid = actionBar.dataset.listid;
 
       AppController.addTask(Notebook, listid, task);
       ViewController.buildList(Notebook, listid);
