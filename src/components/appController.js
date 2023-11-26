@@ -11,15 +11,12 @@ export const AppController = (() => {
     Notebook.push(newList);
   };
 
-  const showAllLists = (Notebook) => {
-    console.log(Notebook);
-  };
-
   const makeTask = (title) => {
     return new Task(title);
   };
 
-  const addTask = (Notebook, id, task) => {
+  const addTask = (Notebook, listid, task) => {
+    const id = Number(listid);
     const list = Utilities.findListFromID(Notebook, id);
     list.tasks.push(task);
   };
@@ -27,7 +24,6 @@ export const AppController = (() => {
   return {
     makeList,
     addList,
-    showAllLists,
     makeTask,
     addTask,
   };

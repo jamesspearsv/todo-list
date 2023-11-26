@@ -141,6 +141,11 @@ main {
   cursor: pointer;
 }
 
+.nav-item::before {
+  content: "//";
+  margin-right: 3px;
+}
+
 .nav-item:hover {
   color: var(--color-secondary);
 }

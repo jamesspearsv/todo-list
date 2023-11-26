@@ -21,7 +21,9 @@ export const ViewController = (() => {
     }
   };
 
-  const buildList = (Notebook, id) => {
+  const buildList = (Notebook, listid) => {
+    const id = Number(listid);
+
     // Set active list
     document.getElementById("action-bar").dataset.listid = id;
 
@@ -55,7 +57,9 @@ export const ViewController = (() => {
   const toggleModal = (dialog, action) => {
     if (action === "open") {
       dialog.showModal();
-    } else if (action === "close") {
+    }
+
+    if (action === "close") {
       dialog.close();
     }
   };
