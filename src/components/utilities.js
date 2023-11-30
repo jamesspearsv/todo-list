@@ -15,5 +15,9 @@ export const Utilities = (() => {
     }
   };
 
-  return { findListFromID, findIndexFromID };
+  const generateID = () => {
+    return Math.floor(Math.random() * 1000000);
+  };
+
+  return { findListFromID, findIndexFromID, generateID };
 })();

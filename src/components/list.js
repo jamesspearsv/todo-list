@@ -1,6 +1,8 @@
+import { Utilities } from "./utilities";
+
 export class List {
   constructor(name) {
-    this.id = Math.floor(Math.random() * 100000);
+    this.id = Utilities.generateID();
     this.name = name;
     this.tasks = [];
   }

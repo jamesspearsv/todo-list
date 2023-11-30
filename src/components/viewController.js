@@ -1,3 +1,4 @@
+import { AppController } from "./appController";
 import { Utilities } from "./utilities";
 
 export const ViewController = (() => {
@@ -37,16 +38,25 @@ export const ViewController = (() => {
 
     todo_list.replaceChildren();
 
-    for (const task in list.tasks) {
+    for (const index in list.tasks) {
+      const task = list.tasks[index];
       const list_item = document.createElement("li");
       list_item.classList.add("todo-list-item");
 
       const checkbox = document.createElement("input");
       checkbox.setAttribute("type", "checkbox");
-      checkbox.classList.add();
+      checkbox.addEventListener("change", () => {
+        AppController.checkOffTask(Notebook, list.id, task.id);
+        buildList(Notebook, list.id);
+      });
 
       const content = document.createElement("p");
-      content.textContent = list.tasks[task].title;
+      content.textContent = task.title;
+
+      if (task.completed === true) {
+        content.classList.add("completed");
+        checkbox.setAttribute("checked", "true");
+      }
 
       list_item.appendChild(checkbox);
       list_item.appendChild(content);

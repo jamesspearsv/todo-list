@@ -11,16 +11,6 @@ export const AppController = (() => {
     Notebook.push(newList);
   };
 
-  const makeTask = (title) => {
-    return new Task(title);
-  };
-
-  const addTask = (Notebook, listid, task) => {
-    const id = Number(listid);
-    const list = Utilities.findListFromID(Notebook, id);
-    list.tasks.push(task);
-  };
-
   const deleteList = (Notebook, listid) => {
     const confirmation = confirm("Are you sure you want to delete this list?");
 
@@ -34,11 +24,32 @@ export const AppController = (() => {
     }
   };
 
+  const makeTask = (title) => {
+    return new Task(title);
+  };
+
+  const addTask = (Notebook, listid, task) => {
+    const id = Number(listid);
+    const list = Utilities.findListFromID(Notebook, id);
+    list.tasks.push(task);
+  };
+
+  const checkOffTask = (Notebook, listid, taskid) => {
+    const list = Utilities.findListFromID(Notebook, listid);
+
+    for (let index in list.tasks) {
+      if (list.tasks[index].id === taskid) {
+        list.tasks[index].completed = !list.tasks[index].completed;
+      }
+    }
+  };
+
   return {
     makeList,
     addList,
     deleteList,
     makeTask,
     addTask,
+    checkOffTask,
   };
 })();

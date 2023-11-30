@@ -149,3 +149,8 @@ main {
 .nav-item:hover {
   color: var(--color-secondary);
 }
+
+.completed {
+  text-decoration: line-through;
+  color: #686868;
+}
