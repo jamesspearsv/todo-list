@@ -32,7 +32,7 @@ export const ViewController = (() => {
     // Set active list
     document.getElementById("action-bar").dataset.listid = id;
 
-    const list = Utilities.findListFromID(Notebook, id);
+    const list = Utilities.findObjectFromID(Notebook, id);
 
     list_heading.textContent = list.name;
 
@@ -45,6 +45,7 @@ export const ViewController = (() => {
 
       const checkbox = document.createElement("input");
       checkbox.setAttribute("type", "checkbox");
+      checkbox.classList.add("checkmark");
       checkbox.addEventListener("change", () => {
         AppController.checkOffTask(Notebook, list.id, task.id);
         buildList(Notebook, list.id);
@@ -53,12 +54,20 @@ export const ViewController = (() => {
       const content = document.createElement("p");
       content.textContent = task.title;
 
+      const crossmark = document.createElement("div");
+      crossmark.classList.add("crossmark");
+      crossmark.addEventListener("click", () => {
+        AppController.deleteTask(Notebook, list.id, task.id);
+        buildList(Notebook, list.id);
+      });
+
       if (task.completed === true) {
         content.classList.add("completed");
         checkbox.setAttribute("checked", "true");
       }
 
       list_item.appendChild(checkbox);
+      list_item.appendChild(crossmark);
       list_item.appendChild(content);
 
       todo_list.appendChild(list_item);

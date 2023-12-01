@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const tempList = AppController.makeList("Demo List");
   const tempTask = AppController.makeTask("task 1");
   const tempTask1 = AppController.makeTask("task 2");
+  tempTask1.completed = true;
   tempList.tasks.push(tempTask);
   tempList.tasks.push(tempTask1);
   AppController.addList(Notebook, tempList);
 
   // Initialize app when page is loaded
   (() => {
-    Notebook[0].active = true;
     ViewController.buildNav(Notebook);
     ViewController.buildList(Notebook, Notebook[0].id);
   })();
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("new-task-cancel")
     .addEventListener("click", (event) => {
       event.preventDefault();
-      const form = document.getElementById("new-list-form");
+      const form = document.getElementById("new-task-form");
       form.reset();
       ViewController.toggleModal(newTaskDialog, "close");
     });

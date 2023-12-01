@@ -16,12 +16,12 @@ export const AppController = (() => {
 
     if (confirmation === false) {
       return 1;
-    } else {
-      const id = Number(listid);
-      const listindex = Utilities.findIndexFromID(Notebook, id);
-
-      Notebook.splice(listindex, 1);
     }
+
+    const id = Number(listid);
+    const listindex = Utilities.findIndexFromID(Notebook, id);
+
+    Notebook.splice(listindex, 1);
   };
 
   const makeTask = (title) => {
@@ -30,18 +30,27 @@ export const AppController = (() => {
 
   const addTask = (Notebook, listid, task) => {
     const id = Number(listid);
-    const list = Utilities.findListFromID(Notebook, id);
+    const list = Utilities.findObjectFromID(Notebook, id);
     list.tasks.push(task);
   };
 
   const checkOffTask = (Notebook, listid, taskid) => {
-    const list = Utilities.findListFromID(Notebook, listid);
+    const list = Utilities.findObjectFromID(Notebook, listid);
+    const task = Utilities.findObjectFromID(list.tasks, taskid);
+    task.completed = !task.completed;
+  };
 
-    for (let index in list.tasks) {
-      if (list.tasks[index].id === taskid) {
-        list.tasks[index].completed = !list.tasks[index].completed;
-      }
+  const deleteTask = (Notebook, listid, taskid) => {
+    const confirmation = confirm("Are you sure you want to delete this task?");
+
+    if (confirmation === false) {
+      return 1;
     }
+
+    const list = Utilities.findObjectFromID(Notebook, listid);
+    const index = Utilities.findIndexFromID(list.tasks, taskid);
+
+    list.tasks.splice(index, 1);
   };
 
   return {
@@ -51,5 +60,6 @@ export const AppController = (() => {
     makeTask,
     addTask,
     checkOffTask,
+    deleteTask,
   };
 })();

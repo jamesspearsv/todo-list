@@ -1,15 +1,15 @@
 export const Utilities = (() => {
-  const findListFromID = (Notebook, id) => {
-    for (let index in Notebook) {
-      if (Notebook[index].id === id) {
-        return Notebook[index];
+  const findObjectFromID = (Array, id) => {
+    for (let index in Array) {
+      if (Array[index].id === id) {
+        return Array[index];
       }
     }
   };
 
-  const findIndexFromID = (Notebook, id) => {
-    for (let index in Notebook) {
-      if (Notebook[index].id === id) {
+  const findIndexFromID = (Array, id) => {
+    for (let index in Array) {
+      if (Array[index].id === id) {
         return index;
       }
     }
@@ -19,5 +19,5 @@ export const Utilities = (() => {
     return Math.floor(Math.random() * 1000000);
   };
 
-  return { findListFromID, findIndexFromID, generateID };
+  return { findObjectFromID, findIndexFromID, generateID };
 })();
