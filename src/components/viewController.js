@@ -2,7 +2,7 @@ import { AppController } from "./appController";
 import { Utilities } from "./utilities";
 
 export const ViewController = (() => {
-  // TODO: SHARED DOM elements
+  // *--- SHARED DOM elements ---* //
   const todo_list = document.getElementById("todo-list");
   const list_heading = document.getElementById("list-heading");
 
@@ -12,7 +12,7 @@ export const ViewController = (() => {
     // Remove all nav items
     nav_list.replaceChildren();
 
-    // Iterate over Notebook
+    // Create DOM element for each list in Notebook
     for (let index in Notebook) {
       const list = Notebook[index];
       // Create DOM elements
@@ -21,6 +21,7 @@ export const ViewController = (() => {
       nav_item.classList.add("nav-item");
       nav_item.id = list.id;
 
+      // Add event listener to each nav item
       nav_item.addEventListener("click", () => buildList(Notebook, list.id));
       nav_list.appendChild(nav_item);
     }
