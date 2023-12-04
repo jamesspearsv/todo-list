@@ -24,8 +24,8 @@ export const AppController = (() => {
     Notebook.splice(listindex, 1);
   };
 
-  const makeTask = (title) => {
-    return new Task(title);
+  const makeTask = (title, description, dueDate, priority) => {
+    return new Task(title, description, dueDate, priority);
   };
 
   const addTask = (Notebook, listid, task) => {

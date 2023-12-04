@@ -90,5 +90,15 @@ export const ViewController = (() => {
     }
   };
 
-  return { buildNav, buildList, clearList, toggleModal };
+  const toggleSidebar = () => {
+    const sidebar = document.getElementById("sidebar");
+
+    if ("none" === sidebar.style.display) {
+      sidebar.style.display = "flex";
+    } else {
+      sidebar.style.display = "none";
+    }
+  };
+
+  return { buildNav, buildList, clearList, toggleModal, toggleSidebar };
 })();

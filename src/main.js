@@ -104,10 +104,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Gather submitted form data
       const form = event.target;
-      const input = form.elements.tasktitle.value;
+      const title = form.elements.tasktitle.value;
+      const description = form.elements.taskdescription.value;
+      const dueDate = form.elements.taskduedate.value;
+      const priority = form.elements.taskpriority.value;
 
       // Make new task from data
-      const task = AppController.makeTask(input);
+      const task = AppController.makeTask(
+        title,
+        description,
+        dueDate,
+        priority
+      );
       const listid = actionBar.dataset.listid;
 
       // Add task to current list
@@ -128,4 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
       form.reset();
       ViewController.toggleModal(newTaskDialog, "close");
     });
+
+  document
+    .getElementById("close-sidebar")
+    .addEventListener("click", ViewController.toggleSidebar);
 });
