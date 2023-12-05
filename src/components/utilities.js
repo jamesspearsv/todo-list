@@ -19,5 +19,19 @@ export const Utilities = (() => {
     return Math.floor(Math.random() * 1000000);
   };
 
-  return { findObjectFromID, findIndexFromID, generateID };
+  const writeToLocalStorage = (Notebook) => {
+    localStorage.notebook = JSON.stringify(Notebook);
+  };
+
+  const readLocalStorage = () => {
+    console.log("Read from local storage!");
+  };
+
+  return {
+    findObjectFromID,
+    findIndexFromID,
+    generateID,
+    writeToLocalStorage,
+    readLocalStorage,
+  };
 })();

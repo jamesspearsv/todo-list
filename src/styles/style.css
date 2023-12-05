@@ -22,13 +22,14 @@
 #topbar {
   width: 100%;
   display: flex;
+  gap: 1rem;
   align-items: center;
   height: var(--topbar-height);
   background-color: var(--color-primary);
+  padding-left: 2rem;
 }
 
-#close-sidebar {
-  margin-left: 2rem;
+#topbar > button {
   padding: 5px;
 }
 

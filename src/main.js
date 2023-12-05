@@ -1,21 +1,23 @@
 import "./styles/style.css";
 import { AppController } from "./components/appController";
 import { ViewController } from "./components/viewController";
+import { Utilities } from "./components/utilities";
 
 // App State and Data
-let Notebook = []; // Array of objects
+// let Notebook = []; // Array of objects
+let Notebook = JSON.parse(localStorage.notebook);
 window.Notebook = Notebook;
 
 // Initalize app and add event listeners to DOM elements
 document.addEventListener("DOMContentLoaded", () => {
-  // Demo Data
-  const tempList = AppController.makeList("Demo List");
-  const tempTask = AppController.makeTask("task 1");
-  const tempTask1 = AppController.makeTask("task 2");
-  tempTask1.completed = true;
-  tempList.tasks.push(tempTask);
-  tempList.tasks.push(tempTask1);
-  AppController.addList(Notebook, tempList);
+  // // Demo Data
+  // const tempList = AppController.makeList("Demo List");
+  // const tempTask = AppController.makeTask("task 1");
+  // const tempTask1 = AppController.makeTask("task 2");
+  // tempTask1.completed = true;
+  // tempList.tasks.push(tempTask);
+  // tempList.tasks.push(tempTask1);
+  // AppController.addList(Notebook, tempList);
 
   // Initialize app when page is loaded
   (() => {
@@ -140,4 +142,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("close-sidebar")
     .addEventListener("click", ViewController.toggleSidebar);
+
+  document.getElementById("local-storage").addEventListener("click", () => {
+    Utilities.writeToLocalStorage(Notebook);
+  });
 });
