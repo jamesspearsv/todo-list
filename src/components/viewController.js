@@ -33,36 +33,47 @@ export const ViewController = (() => {
     // Set active list
     document.getElementById("action-bar").dataset.listid = id;
 
+    // Find list in Notebook
     const list = Utilities.findObjectFromID(Notebook, id);
 
     list_heading.textContent = list.name;
 
     todo_list.replaceChildren();
 
+    // Create list item element for each task in list.tasks
     for (const index in list.tasks) {
       const task = list.tasks[index];
       const list_item = document.createElement("li");
       list_item.classList.add("todo-list-item");
 
+      // Create checkbox and add event listener
       const checkbox = document.createElement("input");
       checkbox.setAttribute("type", "checkbox");
       checkbox.classList.add("checkmark");
       checkbox.addEventListener("change", () => {
+        // Toggle task.completed and update ;localStorage
         AppController.checkOffTask(Notebook, list.id, task.id);
+        Utilities.writeToLocalStorage(Notebook);
+
+        buildList(Notebook, list.id);
+      });
+
+      // Create cross mark and add event listener
+      const crossmark = document.createElement("div");
+      crossmark.classList.add("crossmark");
+      crossmark.addEventListener("click", () => {
+        // Delete task and update localStorage
+        AppController.deleteTask(Notebook, list.id, task.id);
+        Utilities.writeToLocalStorage(Notebook);
+
         buildList(Notebook, list.id);
       });
 
       const content = document.createElement("p");
       content.textContent = task.title;
 
-      const crossmark = document.createElement("div");
-      crossmark.classList.add("crossmark");
-      crossmark.addEventListener("click", () => {
-        AppController.deleteTask(Notebook, list.id, task.id);
-        buildList(Notebook, list.id);
-      });
-
-      if (task.completed === true) {
+      // Render item with strikethrough if completed
+      if (true === task.completed) {
         content.classList.add("completed");
         checkbox.setAttribute("checked", "true");
       }

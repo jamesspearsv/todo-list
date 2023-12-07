@@ -20,11 +20,16 @@ export const Utilities = (() => {
   };
 
   const writeToLocalStorage = (Notebook) => {
-    localStorage.notebook = JSON.stringify(Notebook);
+    let notebook = JSON.stringify(Notebook);
+    localStorage.setItem("notebook", notebook);
   };
 
   const readLocalStorage = () => {
-    console.log("Read from local storage!");
+    if (localStorage.getItem("notebook") === null) {
+      localStorage.setItem("notebook", "[]");
+    }
+
+    return JSON.parse(localStorage.notebook);
   };
 
   return {

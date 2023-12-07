@@ -3,26 +3,19 @@ import { AppController } from "./components/appController";
 import { ViewController } from "./components/viewController";
 import { Utilities } from "./components/utilities";
 
-// App State and Data
+// App State
 // let Notebook = []; // Array of objects
-let Notebook = JSON.parse(localStorage.notebook);
+let Notebook = Utilities.readLocalStorage();
 window.Notebook = Notebook;
 
 // Initalize app and add event listeners to DOM elements
 document.addEventListener("DOMContentLoaded", () => {
-  // // Demo Data
-  // const tempList = AppController.makeList("Demo List");
-  // const tempTask = AppController.makeTask("task 1");
-  // const tempTask1 = AppController.makeTask("task 2");
-  // tempTask1.completed = true;
-  // tempList.tasks.push(tempTask);
-  // tempList.tasks.push(tempTask1);
-  // AppController.addList(Notebook, tempList);
-
   // Initialize app when page is loaded
   (() => {
     ViewController.buildNav(Notebook);
-    ViewController.buildList(Notebook, Notebook[0].id);
+    if (Notebook.length > 0) {
+      ViewController.buildList(Notebook, Notebook[0].id);
+    }
   })();
 
   // Shared DOM Elements
@@ -49,8 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
       // Make new list from data
       const new_list = AppController.makeList(input);
 
-      // Add list to Notebook and redraw screen
+      // Add list to Notebook and update localStorage
       AppController.addList(Notebook, new_list);
+      Utilities.writeToLocalStorage(Notebook);
+
+      // Redraw screen
       ViewController.buildNav(Notebook);
       ViewController.buildList(Notebook, new_list.id);
 
@@ -73,7 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("delete-list-button")
     .addEventListener("click", () => {
       const listid = actionBar.dataset.listid;
+      // Delete list and update localStorage
       AppController.deleteList(Notebook, listid);
+      Utilities.writeToLocalStorage(Notebook);
+
       ViewController.buildNav(Notebook);
 
       // If Notebook is not empty, redraw first list
@@ -120,9 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       const listid = actionBar.dataset.listid;
 
-      // Add task to current list
+      // Add task to current list and update localStorage
       AppController.addTask(Notebook, listid, task);
       ViewController.buildList(Notebook, listid);
+      Utilities.writeToLocalStorage(Notebook);
 
       // Reset form and close modal
       form.reset();
@@ -142,8 +142,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("close-sidebar")
     .addEventListener("click", ViewController.toggleSidebar);
-
-  document.getElementById("local-storage").addEventListener("click", () => {
-    Utilities.writeToLocalStorage(Notebook);
-  });
 });
