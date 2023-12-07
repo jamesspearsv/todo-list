@@ -91,24 +91,18 @@ export const ViewController = (() => {
     list_heading.textContent = "";
   };
 
-  const toggleModal = (dialog, action) => {
-    if (action === "open") {
+  const toggleModal = (dialog) => {
+    if (dialog.classList.contains("opened")) {
+      dialog.close();
+    } else {
       dialog.showModal();
     }
 
-    if (action === "close") {
-      dialog.close();
-    }
+    dialog.classList.toggle("opened");
   };
 
   const toggleSidebar = () => {
-    const sidebar = document.getElementById("sidebar");
-
-    if ("none" === sidebar.style.display) {
-      sidebar.style.display = "flex";
-    } else {
-      sidebar.style.display = "none";
-    }
+    document.getElementById("sidebar").classList.toggle("sidebar-closed");
   };
 
   return { buildNav, buildList, clearList, toggleModal, toggleSidebar };

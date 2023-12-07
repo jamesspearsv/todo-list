@@ -6,7 +6,6 @@ import { Utilities } from "./components/utilities";
 // App State
 // let Notebook = []; // Array of objects
 let Notebook = Utilities.readLocalStorage();
-window.Notebook = Notebook;
 
 // Initalize app and add event listeners to DOM elements
 document.addEventListener("DOMContentLoaded", () => {
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // *--- EVENT LISTENERS ---* //
   // Open new list modal with new list button
   document.getElementById("new-list-button").addEventListener("click", () => {
-    ViewController.toggleModal(newListDialog, "open");
+    ViewController.toggleModal(newListDialog);
   });
 
   // Handle submitted new list form
@@ -51,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ViewController.buildList(Notebook, new_list.id);
 
       form.reset();
-      ViewController.toggleModal(newListDialog, "close");
+      ViewController.toggleModal(newListDialog);
     });
 
   // Handle canceled new list form
@@ -61,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       const form = document.getElementById("new-list-form");
       form.reset();
-      ViewController.toggleModal(newListDialog, "close");
+      ViewController.toggleModal(newListDialog);
     });
 
   // Delete list when delete list button is clicked
@@ -85,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-  // Add task button opens add task modal
+  // Open new task modal when button is clicked
   document.getElementById("new-task-button").addEventListener("click", () => {
     // Check if Notebook has any lists
     if (Notebook.length === 0) {
@@ -94,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    ViewController.toggleModal(newTaskDialog, "open");
+    ViewController.toggleModal(newTaskDialog);
   });
 
   // Handle submitted new task form
@@ -126,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Reset form and close modal
       form.reset();
-      ViewController.toggleModal(newTaskDialog, "close");
+      ViewController.toggleModal(newTaskDialog);
     });
 
   // Handle canceled new task form
@@ -136,9 +135,10 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       const form = document.getElementById("new-task-form");
       form.reset();
-      ViewController.toggleModal(newTaskDialog, "close");
+      ViewController.toggleModal(newTaskDialog);
     });
 
+  // Manage sidebar open/closed status
   document
     .getElementById("close-sidebar")
     .addEventListener("click", ViewController.toggleSidebar);
