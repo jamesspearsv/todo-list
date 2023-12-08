@@ -20,7 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Shared DOM Elements
   const newListDialog = document.getElementById("new-list-dialog");
   const newTaskDialog = document.getElementById("new-task-dialog");
+  const taskDetailDialog = document.getElementById("task-detail-dialog");
   const actionBar = document.getElementById("action-bar");
+
+  ViewController.toggleModal(taskDetailDialog);
 
   // *--- EVENT LISTENERS ---* //
   // Open new list modal with new list button
@@ -142,4 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("close-sidebar")
     .addEventListener("click", ViewController.toggleSidebar);
+
+  document.getElementById("task-detail-close").addEventListener("click", () => {
+    ViewController.toggleModal(taskDetailDialog);
+  });
 });
