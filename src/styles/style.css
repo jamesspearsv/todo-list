@@ -107,14 +107,18 @@ main {
 }
 
 /* Dialog Menus */
-#task-detail-dialog {
+#task-detail-dialog:focus {
+  outline: none;
+}
+
+#task-detail-container {
   width: 25vw;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-#task-detail-dialog > div {
+#task-detail-container > div {
   display: flex;
   gap: 3px;
   align-items: center;

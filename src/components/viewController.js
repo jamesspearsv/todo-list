@@ -5,6 +5,7 @@ export const ViewController = (() => {
   // *--- SHARED DOM elements ---* //
   const todo_list = document.getElementById("todo-list");
   const list_heading = document.getElementById("list-heading");
+  const taskDetailDialog = document.getElementById("task-detail-dialog");
 
   //   Control view and DOM interactions
   const buildNav = (Notebook) => {
@@ -22,19 +23,19 @@ export const ViewController = (() => {
       nav_item.id = list.id;
 
       // Add event listener to each nav item
-      nav_item.addEventListener("click", () => buildList(Notebook, list.id));
+      nav_item.addEventListener("click", () => buildList(Notebook, list));
       nav_list.appendChild(nav_item);
     }
   };
 
-  const buildList = (Notebook, listid) => {
-    const id = Number(listid);
+  const buildList = (Notebook, list) => {
+    const id = list.id;
 
     // Set active list
     document.getElementById("action-bar").dataset.listid = id;
 
     // Find list in Notebook
-    const list = Utilities.findObjectFromID(Notebook, id);
+    // const list = Utilities.findObjectFromID(Notebook, id);
 
     list_heading.textContent = list.name;
 
@@ -43,6 +44,7 @@ export const ViewController = (() => {
     // Create list item element for each task in list.tasks
     for (const index in list.tasks) {
       const task = list.tasks[index];
+
       const list_item = document.createElement("li");
       list_item.classList.add("todo-list-item");
 
@@ -52,10 +54,11 @@ export const ViewController = (() => {
       checkbox.classList.add("checkmark");
       checkbox.addEventListener("change", () => {
         // Toggle task.completed and update ;localStorage
-        AppController.checkOffTask(Notebook, list.id, task.id);
+        // AppController.checkOffTask(Notebook, list.id, task.id);
+        AppController.checkOffTask(task);
         Utilities.writeToLocalStorage(Notebook);
 
-        buildList(Notebook, list.id);
+        buildList(Notebook, list);
       });
 
       // Create cross mark and add event listener
@@ -63,14 +66,17 @@ export const ViewController = (() => {
       crossmark.classList.add("crossmark");
       crossmark.addEventListener("click", () => {
         // Delete task and update localStorage
-        AppController.deleteTask(Notebook, list.id, task.id);
+        AppController.deleteTask(list, task.id);
         Utilities.writeToLocalStorage(Notebook);
 
-        buildList(Notebook, list.id);
+        buildList(Notebook, list);
       });
 
       const content = document.createElement("p");
       content.textContent = task.title;
+      content.addEventListener("click", () => {
+        buildDetailedView(task);
+      });
 
       // Render item with strikethrough if completed
       if (true === task.completed) {
@@ -105,5 +111,18 @@ export const ViewController = (() => {
     document.getElementById("sidebar").classList.toggle("sidebar-closed");
   };
 
-  return { buildNav, buildList, clearList, toggleModal, toggleSidebar };
+  const buildDetailedView = (task) => {
+    // do stuff
+    console.log(task);
+    toggleModal(taskDetailDialog);
+  };
+
+  return {
+    buildNav,
+    buildList,
+    clearList,
+    toggleModal,
+    toggleSidebar,
+    buildDetailedView,
+  };
 })();

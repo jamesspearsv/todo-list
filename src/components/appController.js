@@ -11,43 +11,39 @@ export const AppController = (() => {
     Notebook.push(newList);
   };
 
-  const deleteList = (Notebook, listid) => {
+  const deleteList = (Notebook, list) => {
     const confirmation = confirm("Are you sure you want to delete this list?");
 
     if (confirmation === false) {
       return 1;
     }
 
-    const id = Number(listid);
-    const listindex = Utilities.findIndexFromID(Notebook, id);
+    const index = Utilities.findIndexFromID(Notebook, list.id);
 
-    Notebook.splice(listindex, 1);
+    Notebook.splice(index, 1);
   };
 
   const makeTask = (title, description, dueDate, priority) => {
     return new Task(title, description, dueDate, priority);
   };
 
-  const addTask = (Notebook, listid, task) => {
-    const id = Number(listid);
-    const list = Utilities.findObjectFromID(Notebook, id);
+  const addTask = (Notebook, list, task) => {
+    // const id = Number(listid);
+    // const list = Utilities.findObjectFromID(Notebook, id);
     list.tasks.push(task);
   };
 
-  const checkOffTask = (Notebook, listid, taskid) => {
-    const list = Utilities.findObjectFromID(Notebook, listid);
-    const task = Utilities.findObjectFromID(list.tasks, taskid);
+  const checkOffTask = (task) => {
     task.completed = !task.completed;
   };
 
-  const deleteTask = (Notebook, listid, taskid) => {
+  const deleteTask = (list, taskid) => {
     const confirmation = confirm("Are you sure you want to delete this task?");
 
     if (confirmation === false) {
       return 1;
     }
 
-    const list = Utilities.findObjectFromID(Notebook, listid);
     const index = Utilities.findIndexFromID(list.tasks, taskid);
 
     list.tasks.splice(index, 1);

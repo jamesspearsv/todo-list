@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   (() => {
     ViewController.buildNav(Notebook);
     if (Notebook.length > 0) {
-      ViewController.buildList(Notebook, Notebook[0].id);
+      ViewController.buildList(Notebook, Notebook[0]);
     }
   })();
 
@@ -22,8 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const newTaskDialog = document.getElementById("new-task-dialog");
   const taskDetailDialog = document.getElementById("task-detail-dialog");
   const actionBar = document.getElementById("action-bar");
-
-  ViewController.toggleModal(taskDetailDialog);
 
   // *--- EVENT LISTENERS ---* //
   // Open new list modal with new list button
@@ -50,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Redraw screen
       ViewController.buildNav(Notebook);
-      ViewController.buildList(Notebook, new_list.id);
+      ViewController.buildList(Notebook, new_list);
 
       form.reset();
       ViewController.toggleModal(newListDialog);
@@ -70,17 +68,19 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("delete-list-button")
     .addEventListener("click", () => {
-      const listid = actionBar.dataset.listid;
+      // Find list from active actionBar id
+      const id = Number(actionBar.dataset.listid);
+      const list = Utilities.findObjectFromID(Notebook, id);
+
       // Delete list and update localStorage
-      AppController.deleteList(Notebook, listid);
+      AppController.deleteList(Notebook, list);
       Utilities.writeToLocalStorage(Notebook);
 
       ViewController.buildNav(Notebook);
 
       // If Notebook is not empty, redraw first list
       if (Notebook.length != 0) {
-        const id = Notebook[0].id;
-        ViewController.buildList(Notebook, id);
+        ViewController.buildList(Notebook, Notebook[0]);
       } else {
         // else clear list from screen
         ViewController.clearList();
@@ -119,11 +119,12 @@ document.addEventListener("DOMContentLoaded", () => {
         dueDate,
         priority
       );
-      const listid = actionBar.dataset.listid;
+      const id = Number(actionBar.dataset.listid);
+      const list = Utilities.findObjectFromID(Notebook, id);
 
       // Add task to current list and update localStorage
-      AppController.addTask(Notebook, listid, task);
-      ViewController.buildList(Notebook, listid);
+      AppController.addTask(Notebook, list, task);
+      ViewController.buildList(Notebook, list);
       Utilities.writeToLocalStorage(Notebook);
 
       // Reset form and close modal
