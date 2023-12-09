@@ -112,7 +112,7 @@ main {
 }
 
 #task-detail-container {
-  width: 25vw;
+  width: 30vw;
   display: flex;
   flex-direction: column;
   gap: 1rem;

@@ -91,9 +91,9 @@
           <label for="taskpriority">Priority</label>
           <select name="taskpriority" id="taskpriority">
             <option disabled selected value>Select A Priority</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
           </select>
         </div>
         <div class="form-group">
@@ -120,12 +120,16 @@
           <h2 id="task-detail-title"></h2>
           <div class="crossmark" id="task-detail-close"></div>
         </div>
-        <div id="task-detail-description"></div>
-        <div id="task-detail-duedate">
-          <p>Due --</p>
+        <div>
+          <p id="task-detail-description"></p>
         </div>
-        <div id="task-detail-priority">
-          <p>Priority --</p>
+        <div>
+          <p>Due :</p>
+          <p id="task-detail-duedate"></p>
+        </div>
+        <div>
+          <p>Priority :</p>
+          <p id="task-detail-priority"></p>
         </div>
       </div>
     </dialog>

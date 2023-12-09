@@ -114,7 +114,34 @@ export const ViewController = (() => {
   const buildDetailedView = (task) => {
     // do stuff
     console.log(task);
+
+    const title = document.getElementById("task-detail-title");
+    title.textContent = task.title;
+
+    const description = document.getElementById("task-detail-description");
+    description.textContent = task.description;
+
+    const duedate = document.getElementById("task-detail-duedate");
+    duedate.textContent = task.dueDate;
+
+    const priority = document.getElementById("task-detail-priority");
+    priority.textContent = task.priority;
+
     toggleModal(taskDetailDialog);
+  };
+
+  const clearDetailedView = () => {
+    const title = document.getElementById("task-detail-title");
+    title.textContent = "";
+
+    const description = document.getElementById("task-detail-description");
+    description.textContent = "";
+
+    const duedate = document.getElementById("task-detail-duedate");
+    duedate.textContent = "";
+
+    const priority = document.getElementById("task-detail-priority");
+    priority.textContent = "";
   };
 
   return {
@@ -124,5 +151,6 @@ export const ViewController = (() => {
     toggleModal,
     toggleSidebar,
     buildDetailedView,
+    clearDetailedView,
   };
 })();

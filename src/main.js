@@ -4,7 +4,6 @@ import { ViewController } from "./components/viewController";
 import { Utilities } from "./components/utilities";
 
 // App State
-// let Notebook = []; // Array of objects
 let Notebook = Utilities.readLocalStorage();
 
 // Initalize app and add event listeners to DOM elements
@@ -148,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", ViewController.toggleSidebar);
 
   document.getElementById("task-detail-close").addEventListener("click", () => {
+    ViewController.clearDetailedView();
     ViewController.toggleModal(taskDetailDialog);
   });
 });
