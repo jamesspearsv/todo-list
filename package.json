@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "webpack serve",
-    "build": "webpack"
+    "build": "webpack",
+    "publish": "git subtree push --prefix dist origin gh-pages"
   },
   "author": "James Spears, V",
   "license": "MIT",

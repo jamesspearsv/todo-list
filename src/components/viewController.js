@@ -34,9 +34,6 @@ export const ViewController = (() => {
     // Set active list
     document.getElementById("action-bar").dataset.listid = id;
 
-    // Find list in Notebook
-    // const list = Utilities.findObjectFromID(Notebook, id);
-
     list_heading.textContent = list.name;
 
     todo_list.replaceChildren();
@@ -53,8 +50,7 @@ export const ViewController = (() => {
       checkbox.setAttribute("type", "checkbox");
       checkbox.classList.add("checkmark");
       checkbox.addEventListener("change", () => {
-        // Toggle task.completed and update ;localStorage
-        // AppController.checkOffTask(Notebook, list.id, task.id);
+        // Toggle task.completed and update localStorage
         AppController.checkOffTask(task);
         Utilities.writeToLocalStorage(Notebook);
 
@@ -84,9 +80,23 @@ export const ViewController = (() => {
         checkbox.setAttribute("checked", "true");
       }
 
+      const priority = document.createElement("div");
+      priority.classList.add("priority-indicator");
+
+      if ("high" === task.priority.toLowerCase()) {
+        priority.classList.add("priority-high");
+      } else if ("medium" === task.priority.toLowerCase()) {
+        priority.classList.add("priority-medium");
+      } else if ("low" === task.priority.toLowerCase()) {
+        priority.classList.add("priority-low");
+      } else {
+        priority.classList.add("priority-default");
+      }
+
+      list_item.appendChild(priority);
       list_item.appendChild(checkbox);
-      list_item.appendChild(crossmark);
       list_item.appendChild(content);
+      list_item.appendChild(crossmark);
 
       todo_list.appendChild(list_item);
     }
