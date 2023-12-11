@@ -7,7 +7,11 @@
   <script defer src="bundle.js"></script></head>
   <body>
     <div id="topbar">
-      <button id="close-sidebar">Sidebar</button>
+      <div id="close-sidebar">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
     <div id="content-container">
       <nav id="sidebar">
@@ -91,9 +95,9 @@
           <label for="taskpriority">Priority</label>
           <select name="taskpriority" id="taskpriority">
             <option disabled selected value>Select A Priority</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
           </select>
         </div>
         <div class="form-group">
@@ -114,6 +118,24 @@
         </div>
       </form>
     </dialog>
-    <!--  TODO: TASK DETAIL MODAL -->
+    <dialog id="task-detail-dialog" class="modal">
+      <div id="task-detail-container">
+        <div id="task-detail-header">
+          <h2 id="task-detail-title"></h2>
+          <div class="crossmark" id="task-detail-close"></div>
+        </div>
+        <div>
+          <p id="task-detail-description"></p>
+        </div>
+        <div>
+          <p>Due :</p>
+          <p id="task-detail-duedate"></p>
+        </div>
+        <div>
+          <p>Priority :</p>
+          <p id="task-detail-priority"></p>
+        </div>
+      </div>
+    </dialog>
   </body>
 </html>
