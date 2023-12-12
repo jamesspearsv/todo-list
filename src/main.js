@@ -1,4 +1,5 @@
 import "./styles/style.css";
+import "./styles/_mobile.css";
 import { AppController } from "./components/appController";
 import { ViewController } from "./components/viewController";
 import { Utilities } from "./components/utilities";

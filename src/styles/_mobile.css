@@ -1,0 +1,27 @@
+@media screen and (max-width: 600px) {
+  /* -- Mobile Menu Styles -- */
+  :root {
+    font-size: 16px;
+  }
+
+  #content-container {
+    display: block;
+  }
+
+  nav {
+    position: fixed;
+    left: 0;
+    top: var(--topbar-height);
+    background-color: #ffffff;
+
+    z-index: 1000;
+
+    width: 100dvw;
+    height: calc(100% - var(--topbar-height));
+    margin-left: -100dvw;
+  }
+
+  .sidebar-closed {
+    margin-left: 0;
+  }
+}

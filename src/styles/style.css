@@ -36,6 +36,16 @@
 
 #content-container {
   display: flex;
+  position: fixed;
+  top: var(--topbar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#content-container > nav,
+#content-container > main {
+  padding: 2rem;
 }
 
 /* -- Top Bar -- */
@@ -65,9 +75,8 @@
 /* --- Nav --- */
 
 nav {
-  height: var(--content-height);
+  height: 100%;
   border-right: var(--color-accent) solid 1px;
-  padding: 2rem;
   width: var(--sidebar-width);
   display: flex;
   flex-direction: column;
@@ -105,7 +114,7 @@ nav > ul {
 /* --- Main Content --- */
 
 main {
-  padding: 2rem;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -121,7 +130,6 @@ main {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin: 0.5rem;
   padding: 5px;
   background-color: #f0f0f0;
   transition: background-color 500ms;
@@ -137,9 +145,7 @@ main {
 }
 
 #action-bar {
-  position: fixed;
-  bottom: 0;
-  margin-bottom: 2rem;
+  margin-top: auto;
 }
 
 /* Dialog Menus */

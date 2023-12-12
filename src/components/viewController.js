@@ -6,6 +6,7 @@ export const ViewController = (() => {
   const todo_list = document.getElementById("todo-list");
   const list_heading = document.getElementById("list-heading");
   const taskDetailDialog = document.getElementById("task-detail-dialog");
+  const nav = document.querySelector("nav");
 
   //   Control view and DOM interactions
   const buildNav = (Notebook) => {
@@ -23,7 +24,12 @@ export const ViewController = (() => {
       nav_item.id = list.id;
 
       // Add event listener to each nav item
-      nav_item.addEventListener("click", () => buildList(Notebook, list));
+      nav_item.addEventListener("click", () => {
+        buildList(Notebook, list);
+        nav.classList.remove("sidebar-closed");
+      });
+
+      // Append nav item to nav
       nav_list.appendChild(nav_item);
     }
   };
