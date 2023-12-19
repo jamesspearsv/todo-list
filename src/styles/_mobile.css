@@ -1,8 +1,5 @@
 @media screen and (max-width: 600px) {
   /* -- Mobile Menu Styles -- */
-  :root {
-    font-size: 16px;
-  }
 
   #content-container {
     display: block;
@@ -23,5 +20,9 @@
 
   .sidebar-closed {
     margin-left: 0;
+  }
+
+  #task-detail-container {
+    width: 80vw;
   }
 }
