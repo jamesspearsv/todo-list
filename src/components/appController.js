@@ -1,18 +1,21 @@
-import { List } from "./list";
-import { Task } from "./task";
-import { Utilities } from "./utilities";
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-alert */
+import { List } from './list';
+import { Task } from './task';
+import { Utilities } from './utilities';
 
+// eslint-disable-next-line import/prefer-default-export
 export const AppController = (() => {
-  const makeList = (listName) => {
-    return new List(listName);
-  };
+  const makeList = (listName) => new List(listName);
 
   const addList = (Notebook, newList) => {
     Notebook.push(newList);
   };
 
+  // eslint-disable-next-line consistent-return
   const deleteList = (Notebook, list) => {
-    const confirmation = confirm("Are you sure you want to delete this list?");
+    const confirmation = confirm('Are you sure you want to delete this list?');
 
     if (confirmation === false) {
       return 1;
@@ -23,9 +26,8 @@ export const AppController = (() => {
     Notebook.splice(index, 1);
   };
 
-  const makeTask = (title, description, dueDate, priority) => {
-    return new Task(title, description, dueDate, priority);
-  };
+  // eslint-disable-next-line max-len
+  const makeTask = (title, description, dueDate, priority) => new Task(title, description, dueDate, priority);
 
   const addTask = (Notebook, list, task) => {
     // const id = Number(listid);
@@ -37,8 +39,9 @@ export const AppController = (() => {
     task.completed = !task.completed;
   };
 
+  // eslint-disable-next-line consistent-return
   const deleteTask = (list, taskid) => {
-    const confirmation = confirm("Are you sure you want to delete this task?");
+    const confirmation = confirm('Are you sure you want to delete this task?');
 
     if (confirmation === false) {
       return 1;

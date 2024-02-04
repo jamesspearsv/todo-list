@@ -5,7 +5,7 @@ import { ViewController } from "./components/viewController";
 import { Utilities } from "./components/utilities";
 
 // App State
-let Notebook = Utilities.readLocalStorage();
+const Notebook = Utilities.readLocalStorage();
 
 // Initalize app and add event listeners to DOM elements
 document.addEventListener("DOMContentLoaded", () => {
@@ -40,15 +40,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const input = form.elements.listname.value;
 
       // Make new list from data
-      const new_list = AppController.makeList(input);
+      const newList = AppController.makeList(input);
 
       // Add list to Notebook and update localStorage
-      AppController.addList(Notebook, new_list);
+      AppController.addList(Notebook, newList);
       Utilities.writeToLocalStorage(Notebook);
 
       // Redraw screen
       ViewController.buildNav(Notebook);
-      ViewController.buildList(Notebook, new_list);
+      ViewController.buildList(Notebook, newList);
 
       form.reset();
       ViewController.toggleModal(newListDialog);
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ViewController.buildNav(Notebook);
 
       // If Notebook is not empty, redraw first list
-      if (Notebook.length != 0) {
+      if (Notebook.length !== 0) {
         ViewController.buildList(Notebook, Notebook[0]);
       } else {
         // else clear list from screen
@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check if Notebook has any lists
     if (Notebook.length === 0) {
       // If Notebook has not list, prompt user to make a list
+      // eslint-disable-next-line no-alert
       alert("Please make a list first");
       return;
     }
